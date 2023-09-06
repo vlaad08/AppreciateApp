@@ -10,12 +10,10 @@ interface ButtonsProps {
 
 
 
-
-
   const saveAppreciation = async (appreciation : string) => {
     try {
       const currentDate = new Date();
-      const dateString = currentDate.toISOString().split('T')[0]; // Get YYYY-MM-DD format
+      const dateString = currentDate.toISOString().split('T')[0]; 
       const dataToSave = { date: dateString, text: appreciation };
       await AsyncStorage.setItem(dateString, JSON.stringify(dataToSave));
       console.log('Data saved successfully.');
@@ -23,31 +21,7 @@ interface ButtonsProps {
       console.error('Error saving data: ', error);
   }};
   
-  const getAppreciations = async () => {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      const data = await AsyncStorage.multiGet(keys);
   
-      // Process and display the data as needed
-      const formattedData = data
-        .filter(([_, value]) => value !== null) // Filter out null values
-        .map(([key, value]) => {
-          try {
-            if(value != null)
-            {
-              return JSON.parse(value);
-            }
-          } catch (error) {
-            console.error(`Error parsing JSON for key "${key}":`, error);
-            return null; // Handle parsing error by returning null
-          }
-        })
-        .filter((parsedValue) => parsedValue !== null); // Remove parsed values that resulted in parsing errors
-      console.log('Fetched data: ', formattedData);
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
 
 
 const Buttons: React.FC<ButtonsProps> = ({ input }) => {
@@ -59,8 +33,8 @@ const Buttons: React.FC<ButtonsProps> = ({ input }) => {
             <View style={styles.btnContainer}>
                 <TouchableOpacity onPress={() => {saveAppreciation(input)}}>
                     <Text style = {styles.btn1}>I'm grateful for this</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {getAppreciations()}}>
+                </TouchableOpacity> 
+                <TouchableOpacity onPress={() => {}}>
                     <Text style = {styles.btn2}>I have nothing for today</Text>
                 </TouchableOpacity>
             </View>
