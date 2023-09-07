@@ -18,8 +18,7 @@ const getAppreciations = async () => {
               return JSON.parse(value);
             }
           } catch (error) {
-            console.error(`Error parsing JSON for key "${key}":`, error);
-            return null; 
+            return []; 
           }
         })
         .filter((parsedValue) => parsedValue !== null); 
@@ -40,7 +39,7 @@ const getAppreciations = async () => {
 
 
 const Appreciations = () => {
-    const [appreciations, setAppr] = useState<string[]>([]); // Initialize with an empty array
+    const [appreciations, setAppr] = useState<string[]>([]);
 
     useEffect(() => {
     const fetchData = async () => {
