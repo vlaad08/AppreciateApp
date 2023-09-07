@@ -1,21 +1,25 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Gratitude from './src/Gratitude';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainScreen from './screens/MainScreen';
+import AppreciationScreen from './screens/AppreciationsScreen';
 
 
 
+const App = () => {
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Gratitude />
-    </View>
-  );
+  const Stack = createNativeStackNavigator();
+
+
+  return(
+  
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Appr' component={AppreciationScreen}></Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFFFFF",
-    flex: 1,
-  },
-});
+
+export default App;
