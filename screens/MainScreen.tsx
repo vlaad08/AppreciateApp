@@ -1,11 +1,11 @@
 import { Button, StyleSheet, View } from "react-native";
-import Gratitude from "../src/Gratitude";
 import React from 'react'
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackList } from "../routes/NavigationTypes";
+import Grateful from "../src/Grateful";
 
 type ScreenProps = {
-  navigation: StackNavigationProp<StackList, 'Main'>;
+  navigation: StackNavigationProp<StackList, 'Appr'>;
 };
 
 
@@ -13,11 +13,7 @@ type ScreenProps = {
 const MainScreen : React.FC<ScreenProps> = ({navigation}) =>{
     return (
         <View style={styles.container}>
-          <Gratitude />
-          <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Appr')}
-      />
+          <Grateful navigation={navigation} />
         </View>
       );
 }

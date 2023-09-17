@@ -18,8 +18,8 @@ const App = () => {
   return(
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Main' component={MainScreen}></Stack.Screen>
-        <Stack.Screen name='Appr' component={AppreciationScreen}></Stack.Screen>
+        <Stack.Screen name='Main' component={MainScreen} options={{headerShown : false}}></Stack.Screen>
+        <Stack.Screen name='Appr' component={AppreciationScreen} options={{headerShown : false}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )
