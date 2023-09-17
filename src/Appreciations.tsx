@@ -4,38 +4,32 @@ import {FlatList, Text} from 'react-native'
 
 
 const getAppreciations = async () => {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      const data = await AsyncStorage.multiGet(keys);
-  
-      
-      const formattedData = data
-        .filter(([_, value]) => value !== null) 
-        .map(([key, value]) => {
-          try {
-            if(value != null)
-            {
-              return JSON.parse(value);
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const data = await AsyncStorage.multiGet(keys);
+
+    const formattedData = data
+      .filter(([_, value]) => value !== null)
+      .map(([key, value]) => {
+        try {
+          if (value !== null) {
+            const parsedValue = JSON.parse(value);
+            if (typeof parsedValue === 'object' && parsedValue.hasOwnProperty('text')) {
+              return parsedValue.text; // Extract the 'text' property
             }
-          } catch (error) {
-            return []; 
           }
-        })
-        .filter((parsedValue) => parsedValue !== null); 
-        
-        const appr : string[] = []
+        } catch (error) {
+          return null; // Handle parsing errors gracefully
+        }
+      })
+      .filter((parsedValue) => parsedValue !== null);
 
-        formattedData.forEach(value => {
-            appr.push(value);
-        })
-
-        return appr;
-
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-      return [];
-    }
-  };
+    return formattedData;
+  } catch (error) {
+    console.error('Error fetching data: ', error);
+    return [];
+  }
+};
 
 
 const Appreciations = () => {

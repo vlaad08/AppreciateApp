@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet } from 'react-native'
 import Appreciations from '../src/Appreciations';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const AppreciationScreen = () => {
+const AppreciationScreen = ({}) => {
     return(
         <View style={styles.container}>
             <Appreciations></Appreciations>

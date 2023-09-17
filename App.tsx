@@ -6,15 +6,19 @@ import AppreciationScreen from './screens/AppreciationsScreen';
 
 
 
+
+
+
+
 const App = () => {
 
   const Stack = createNativeStackNavigator();
 
 
   return(
-  
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='Main' component={MainScreen}></Stack.Screen>
         <Stack.Screen name='Appr' component={AppreciationScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
