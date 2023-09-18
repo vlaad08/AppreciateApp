@@ -8,10 +8,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 
-
-
-
-
 const App = () => {
 
   const Stack = createNativeStackNavigator();
@@ -29,8 +25,8 @@ const App = () => {
   const AppNavigator = () => {
     return(
       <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={MainStack} options={{}} />
-        <Drawer.Screen name="Appreciations" component={AppreciationScreen}/>
+        <Drawer.Screen name="Home" component={MainStack} options={{headerTitle : ""}} />
+        <Drawer.Screen name="My Appreciations" component={AppreciationScreen}/>
       </Drawer.Navigator>
     )
   }
