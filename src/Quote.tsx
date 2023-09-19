@@ -1,30 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import * as fs from 'fs';
+import  jsonData from '../assets/quotes.json'; 
+import QuoteDisplay from './QuoteDisplay';
 
-
-
-
-const getQuote = () : string => {
-    fs.readFile("../assets/quotes.json", 'utf8', (err, data) => {
-        if (err) {
-          return "";
-        }
-        try {
-          const jsonData = JSON.parse(data);
-          console.log(jsonData);
-        } catch (parseError) {
-            console.log("eroara pula")
-        }
-      });
-    return "caca"
-}
 
 
 const Quote  = () => {
+    
+   
+
     return (
         <View style={styles.container}>
-            <Text>{getQuote()}</Text>
+            <QuoteDisplay/>
         </View>
     );
 }
@@ -34,7 +21,15 @@ const styles = StyleSheet.create({
     container : {
         width: '100%',
         height: 200,
-        backgroundColor: '#C5B1EC'
+        backgroundColor: '#C5B1EC',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 7,
+        },
+        shadowOpacity: 0.41,
+        shadowRadius: 9.11,
+        elevation: 14
     }
 })
 
