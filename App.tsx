@@ -5,7 +5,6 @@ import MainScreen from './screens/MainScreen';
 import AppreciationScreen from './screens/AppreciationsScreen';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 

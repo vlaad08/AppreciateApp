@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {useState, useEffect} from 'react';
-import {FlatList, Text, StyleSheet, View} from 'react-native'
+import {FlatList, Text, StyleSheet, View} from 'react-native';
+import Quote from "./Quote";
 
 
 const getAppreciations = async () => {
@@ -31,6 +32,12 @@ const getAppreciations = async () => {
   }
 };
 
+const Line = () => {
+  return(
+    <View style={styles.line}></View>
+  )
+}
+
 
 const Appreciations = () => {
     const [appreciations, setAppr] = useState<string[]>([]);
@@ -44,24 +51,41 @@ const Appreciations = () => {
     fetchData();
   }, [])
 
-    return(
-        <FlatList
+
+  return(
+    <View style={styles.container}>
+      <Quote/>
+      <FlatList
+        ItemSeparatorComponent={Line}
         contentContainerStyle = {styles.apprList}
         data = {appreciations}
         renderItem={({item}) => 
-        <View style= {styles.apprContainer}>
-          <Text style = {styles.appr}>{item}</Text>
-        </View>
-      }
+          <View style= {styles.apprContainer}>
+            <Text style = {styles.appr}>{item}</Text>
+          </View>
+           }
         />
+    </View>
     )
 }
+
 
 
 export default Appreciations;
 
 
+
+
 const styles = StyleSheet.create({
+  container : {
+    width: '100%',
+    height: '100%'
+  },
+  line : {
+    width: "100%",
+    height: 1,
+    backgroundColor: "black"
+  },
   appr : {
     fontSize: 16,
     marginTop: 5,
@@ -90,6 +114,6 @@ const styles = StyleSheet.create({
     justifyContent : "flex-start",
     alignItems : "center",
     marginTop : 50,
-    rowGap: 40
+    rowGap: 40,
   }
 })
