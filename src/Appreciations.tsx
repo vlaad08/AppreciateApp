@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {useState, useEffect} from 'react';
-import {FlatList, Text, StyleSheet} from 'react-native'
+import {FlatList, Text, StyleSheet, View} from 'react-native'
 
 
 const getAppreciations = async () => {
@@ -48,7 +48,11 @@ const Appreciations = () => {
         <FlatList
         contentContainerStyle = {styles.apprList}
         data = {appreciations}
-        renderItem={({item}) => <Text style = {styles.appr}>{item}</Text>}
+        renderItem={({item}) => 
+        <View style= {styles.apprContainer}>
+          <Text style = {styles.appr}>{item}</Text>
+        </View>
+      }
         />
     )
 }
@@ -60,11 +64,15 @@ export default Appreciations;
 const styles = StyleSheet.create({
   appr : {
     fontSize: 16,
-    marginTop: 15,
+    marginTop: 5,
     padding: 15,
     minWidth : "85%",
     maxWidth : "85%",
     height: "auto",
+    
+  },
+  apprContainer : {
+    backgroundColor: "white",
     borderWidth: 3,
     borderColor: "#8558BE",
     borderRadius: 20,
@@ -76,7 +84,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.41,
     shadowRadius: 9.11,
     elevation: 14,
-    backgroundColor : "white"
   },
   apprList : {
     flex : 1,

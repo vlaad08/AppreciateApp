@@ -29,10 +29,14 @@ const Buttons: React.FC<ButtonsProps> = ({ input, navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.btnContainer}>
           <TouchableOpacity onPress={() => { saveAppreciation(input) }}>
-            <Text style={styles.btn1}>I'm grateful for this</Text>
+            <View style={styles.btn1Container}>
+              <Text style={styles.btn1}>I'm grateful for this</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { navigation.navigate('Appr') }}>
-            <Text style={styles.btn2}>I have nothing for today</Text>
+            <View style = {styles.btn2Container}>
+              <Text style={styles.btn2}>I have nothing for today</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>
@@ -52,46 +56,54 @@ const styles = StyleSheet.create(
       justifyContent: 'center',
       alignItems: 'center'
     },
-    btn1: {
+
+    btn1Container : {
+      borderRadius: 25,
       backgroundColor: '#8558BE',
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 7,
+      },
+      shadowOpacity: 0.41,
+      shadowRadius: 9.11,
+      elevation: 14
+    },
+    btn2Container : {
+      marginTop: "2%",
+      borderRadius: 25,
+      backgroundColor: 'white',
+      borderWidth: 2,
+      borderColor: "#8558BE",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 7,
+      },
+      shadowOpacity: 0.41,
+      shadowRadius: 9.11,
+      elevation: 14,
+      },
+    btn1: {
       color: 'white',
       fontSize: 18,
       fontWeight: '700',
       textAlign: 'center',
-      borderRadius: 25,
+ 
       padding: '3%',
       height: 'auto',
       width: 300,
       overflow: 'hidden',
-      shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
+      
     },
     btn2: {
       marginTop: '2%',
-      backgroundColor: 'white',
       color: '#8558BE',
-      borderRadius: 20,
       textAlign: 'center',
       padding: '2%',
       height: 'auto',
       width: 200,
-      fontWeight: '400',
-      borderWidth: 2,
-      borderColor: "#8558BE",
-      shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
+      fontWeight: '400'
     }
   }
 )
