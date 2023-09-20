@@ -71,7 +71,7 @@ const Appreciations = () => {
             const parts = item.split(' ');
       
             if (parts.length >= 2) {
-              const date = parts.shift(); 
+              const date = parts.shift()?.replaceAll('-', ' ') ; 
               const text = parts.join(' '); 
       
               return (
