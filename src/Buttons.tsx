@@ -4,24 +4,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackList } from "../routes/NavigationTypes";
 
+const monthNames = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+  "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+
 
 const saveAppreciation = async (appreciation: string) => {
   try {
     const currentDate = new Date();
-    const dateString = currentDate.toISOString().split('T')[0];
+    const dateString = currentDate.getUTCDate() + " " + monthNames[currentDate.getUTCMonth()] + " " + currentDate.getUTCFullYear(); 
     const dataToSave = { date: dateString, text: appreciation };
     await AsyncStorage.setItem(dateString, JSON.stringify(dataToSave));
     console.log('Data saved successfully.');
+    
   } catch (error) {
     console.error('Error saving data: ', error);
+    
   }
 };
 
 interface ButtonsProps {
     input: string;
-    navigation: StackNavigationProp<StackList, 'Appr'>;
   }
-const Buttons: React.FC<ButtonsProps> = ({ input, navigation }) => {
+const Buttons: React.FC<ButtonsProps> = ({ input }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -33,7 +40,7 @@ const Buttons: React.FC<ButtonsProps> = ({ input, navigation }) => {
               <Text style={styles.btn1}>I'm grateful for this</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { navigation.navigate('Appr') }}>
+          <TouchableOpacity onPress={() => { }}>
             <View style = {styles.btn2Container}>
               <Text style={styles.btn2}>I have nothing for today</Text>
             </View>

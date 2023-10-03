@@ -16,7 +16,7 @@ const getAppreciations = async () => {
           if (value !== null) {
             const parsedValue = JSON.parse(value);
             if (typeof parsedValue === 'object' && parsedValue.hasOwnProperty('text')&& parsedValue.hasOwnProperty('date')) {
-              
+        
               return parsedValue.date + " " + parsedValue.text; 
             }
           }
@@ -28,7 +28,6 @@ const getAppreciations = async () => {
 
     return formattedData;
   } catch (error) {
-    console.error('Error fetching data: ', error);
     return [];
   }
 };
@@ -40,8 +39,8 @@ const Line = () => {
 }
 
 
-const Appreciations = () => {
-    const [appreciations, setAppr] = useState<string[]>([]);
+const AppreciationsList = () => {
+  const [appreciations, setAppr] = useState<string[]>([]);
 
     useEffect(() => {
     const fetchData = async () => {
@@ -53,39 +52,46 @@ const Appreciations = () => {
     fetchData();
   }, [])
 
-
-  return(
-    <View style={styles.container}>
-      <Quote/>
-      <FlatList
+  return (
+    <FlatList
         ItemSeparatorComponent={Line}
         contentContainerStyle = {styles.apprList}
         data = {appreciations}
         renderItem={({item}) => {
-          
-          // <View style= {styles.apprContainer}>
-          //   <Text style = {styles.appr}>{item}</Text>
-          // </View>
-
           if (item) {
-            const parts = item.split(' ');
-      
-            if (parts.length >= 2) {
-              const date = parts.shift()?.replaceAll('-', ' ') ; 
-              const text = parts.join(' '); 
-      
+            const fullText = item.split(" ");
+            
+            const date = fullText[0] + "\n" + fullText[1] + "\n" + fullText[2];
+
+            const text = () =>{
+              let value = "";
+              for(let i = 3; i < fullText.length; i++)
+              {
+                value += fullText[i] + " " ;
+              }
+              return value;
+            }
+
               return (
                 <View style={styles.apprContainer}>
-                  <Text style={styles.appr}>{date}</Text>
-                  <Text style={styles.appr}>{text}</Text>
+                  <Text style={styles.apprDate}>{date}</Text>
+                  <Text style={styles.apprText}>{text()}</Text>
                 </View>
               );
-            }
           }
           return null;
         }
         }
         />
+  )
+}
+
+
+const Appreciations = () => {
+  return(
+    <View style={styles.container}>
+      <Quote/>
+      <AppreciationsList/>
     </View>
     )
 }
@@ -107,21 +113,36 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "black"
   },
-  appr : {
+  apprText : {
     fontSize: 17,
-    minWidth : "85%",
-    maxWidth : "85%",
-    height: "auto",
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
+    width: "75%"
+  },
+  apprDate : {
+    width: "20%",
+    textAlign: "center",
+    backgroundColor: "#8558BE",
+    padding: "2%",
+    color: "white",
+    shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 7,
+      },
+      shadowOpacity: 0.41,
+      shadowRadius: 9.11,
+      elevation: 14,
   },
   apprContainer : {
-    padding: 10
+    padding: 10,
+    flex: 1,
+    flexDirection : "row"
   },
   apprList : {
-    flex : 1,
-    marginTop : 50,
     justifyContent: "flex-start",
-    rowGap: 20
+    rowGap: 20,
+    flexGrow: 1,
+    height: "auto"
   }
 })
