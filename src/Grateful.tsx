@@ -1,26 +1,19 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput} from "react-native";
-import Buttons from "./Buttons";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { StackList } from "../routes/NavigationTypes";
+import Buttons from "./Buttons";  
+
+const Grateful = () => {
+  const [inputValue, setInputValue] = useState<string>('');
+  const [characters, setCharacters] = useState<number>(0);
+
+  const handleInputChange = (txt: string) => {
+    setInputValue(txt);
+    setCharacters(txt.length);
+  };
 
 
-interface GratefulProps{
-  navigation : StackNavigationProp<StackList, 'Appr'>;
-}
-
-
-const Grateful: React.FC<GratefulProps> = ({navigation}) => {
-    const [inputValue, setInputValue] = useState<string>('');
-    const [characters, setCharacters] = useState<number>(0);
-  
-    const handleInputChange = (txt: string) => {
-      setInputValue(txt);
-      setCharacters(txt.length);
-    };
-  
-    return (
-      <View style={styles.container}>
+  return (
+    <View style={styles.container}>
       <Text style={styles.title}>What are you grateful for today?</Text>
       <TextInput
         placeholder="Start writing here..."
@@ -30,14 +23,14 @@ const Grateful: React.FC<GratefulProps> = ({navigation}) => {
         numberOfLines={5}
         maxLength={150}
         onChangeText={handleInputChange}
-        blurOnSubmit
         value={inputValue}
       />
       <Text>{characters}/150</Text>
-      <Buttons input={inputValue} navigation={navigation} /> 
+      <Buttons input={inputValue} handleInput={handleInputChange}/>
     </View>
-    );
+  );
 };
+
 
 export default Grateful;
 
@@ -59,7 +52,10 @@ const styles = StyleSheet.create(
             fontSize : 18,
             textAlign : "left",
             padding : '5%',
-            marginTop : '20%'
+            marginTop : '20%',
+            borderColor: 'black',
+            borderStyle: 'solid',
+            borderWidth: 2
         }
     }
 )

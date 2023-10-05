@@ -25,15 +25,16 @@ const saveAppreciation = async (appreciation: string) => {
 
 interface ButtonsProps {
     input: string;
+    handleInput: (txt : string) => void;
   }
-const Buttons: React.FC<ButtonsProps> = ({ input }) => {
+const Buttons: React.FC<ButtonsProps> = ({ input, handleInput }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.btnContainer}>
-          <TouchableOpacity onPress={() => { saveAppreciation(input) }}>
+          <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput("")}}>
             <View style={styles.btn1Container}>
               <Text style={styles.btn1}>I'm grateful for this</Text>
             </View>
