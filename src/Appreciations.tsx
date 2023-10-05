@@ -1,36 +1,8 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {FlatList, Text, StyleSheet, View} from 'react-native';
 import Quote from "./Quote";
 
 
-const getAppreciations = async () => {
-  try {
-    const keys = await AsyncStorage.getAllKeys();
-    const data = await AsyncStorage.multiGet(keys);
-
-    const formattedData = data
-      .filter(([_, value]) => value !== null)
-      .map(([key, value]) => {
-        try {
-          if (value !== null) {
-            const parsedValue = JSON.parse(value);
-            if (typeof parsedValue === 'object' && parsedValue.hasOwnProperty('text')&& parsedValue.hasOwnProperty('date')) {
-        
-              return parsedValue.date + " " + parsedValue.text; 
-            }
-          }
-        } catch (error) {
-          return null; 
-        }
-      })
-      .filter((parsedValue) => parsedValue !== null);
-
-    return formattedData;
-  } catch (error) {
-    return [];
-  }
-};
 
 const Line = () => {
   return(
@@ -38,22 +10,17 @@ const Line = () => {
   )
 }
 
+interface AppreciationsProps{
+  appreciations : string[]
+}
 
-const AppreciationsList = () => {
-  const [appreciations, setAppr] = useState<string[]>([]);
 
-    useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAppreciations();
-      const filteredData = data.filter(item => item !== null) as string[];
-      setAppr(filteredData);
-    };
 
-    fetchData();
-  }, [])
-
-  return (
-    <FlatList
+const Appreciations : React.FC<AppreciationsProps> = ({appreciations}) => {
+  return(
+    <View style={styles.container}>
+      <Quote/>
+      <FlatList
         ItemSeparatorComponent={Line}
         contentContainerStyle = {styles.apprList}
         data = {appreciations}
@@ -83,15 +50,6 @@ const AppreciationsList = () => {
         }
         }
         />
-  )
-}
-
-
-const Appreciations = () => {
-  return(
-    <View style={styles.container}>
-      <Quote/>
-      <AppreciationsList/>
     </View>
     )
 }

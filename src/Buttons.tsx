@@ -1,8 +1,6 @@
 import { View, TouchableOpacity, Text, StyleSheet, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StackNavigationProp } from "@react-navigation/stack";
-import { StackList } from "../routes/NavigationTypes";
 
 const monthNames = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
