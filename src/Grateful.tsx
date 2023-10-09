@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { StyleSheet, View, Text, TextInput} from "react-native";
+import { StyleSheet, View, Text, TextInput, Keyboard, TouchableWithoutFeedback} from "react-native";
 import Buttons from "./Buttons";  
 
 const Grateful = () => {
@@ -15,6 +15,8 @@ const Grateful = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>What are you grateful for today?</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible = {false}>
+      <View style={styles.inputContainer}>
       <TextInput
         placeholder="Start writing here..."
         placeholderTextColor={'grey'}
@@ -25,8 +27,13 @@ const Grateful = () => {
         onChangeText={handleInputChange}
         value={inputValue}
       />
-      <Text>{characters}/150</Text>
-      <Buttons input={inputValue} handleInput={handleInputChange}/>
+      <Text style={{
+        alignSelf: 'flex-start',
+        marginTop: "2%"
+      }}>{characters}/150</Text>     
+      <Buttons input={inputValue} handleInput={handleInputChange} />
+      </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
@@ -37,25 +44,29 @@ export default Grateful;
 const styles = StyleSheet.create(
     {
         container :{
-            flex : 1,
-            backgroundColor : 'white',
-            padding : '5%',
-            marginTop : '15%'
+          flex : 1,
+          backgroundColor : 'white',
+          justifyContent:'center', 
+          alignItems: 'flex-start',
+          padding: "5%",
+          marginTop: "2%"
         },
         title :{
             color: 'black',
             fontSize : 22 ,
-            textAlign : 'center',
             fontWeight : '600',
+            alignSelf: 'center'
         },
         input : {
             fontSize : 18,
-            textAlign : "left",
-            padding : '5%',
-            marginTop : '20%',
-            borderColor: 'black',
-            borderStyle: 'solid',
-            borderWidth: 2
+            alignSelf: 'flex-start',
+            marginTop: "3%",
+            borderWidth: 2,
+            
+        },
+        inputContainer :{
+          flex: 2, 
+          alignItems: 'center'
         }
     }
 )

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, StyleSheet, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Alert } from "react-native";
 import React from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,7 +27,23 @@ interface ButtonsProps {
     input: string;
     handleInput: (txt : string) => void;
   }
+
+
+const nothingAlert = ({}) =>{
+  Alert.alert("", "Don't worry, you can always come back later, until then, here's all the days you were grateful",
+  [
+    {
+      text: "OK",
+    },
+    {
+      text: "Wait I have something"
+    }
+  ])
+}
+
 const Buttons: React.FC<ButtonsProps> = ({ input, handleInput }) => {
+  
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -39,7 +55,7 @@ const Buttons: React.FC<ButtonsProps> = ({ input, handleInput }) => {
               <Text style={styles.btn1}>I'm grateful for this</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={() => { }}> 
             <View style = {styles.btn2Container}>
               <Text style={styles.btn2}>I have nothing for today</Text>
             </View>
@@ -55,10 +71,11 @@ export default Buttons;
 const styles = StyleSheet.create(
   {
     container: {
-      flex: 3
+      flex: 1,
+      alignSelf: 'center'
     },
     btnContainer: {
-      flex: 1,
+      flex: 2,
       justifyContent: 'center',
       alignItems: 'center'
     },
