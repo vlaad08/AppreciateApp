@@ -8,33 +8,37 @@ import SettingScreen from './screens/SettingsScreen';
 
 
 
-const App = () => {
-  const Drawer = createDrawerNavigator();
+type AppNavigatorParamList = {
+  Home: undefined;
+  'My Appreciations': undefined;
+  Settings: undefined;
+};
+
+const Drawer = createDrawerNavigator<AppNavigatorParamList>();
 
 
-
-  const AppNavigator = () => {
-    return(
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={MainScreen} options={{headerTitle : ""}} />
-        <Drawer.Screen name="My Appreciations" component={AppreciationScreen}
-        options={{headerStyle : {
-          backgroundColor: '#C5B1EC',
-
-        }}}
-/>
-        <Drawer.Screen name="Settings" component={SettingScreen}/>
-      </Drawer.Navigator>
-    )
-  }
-
-
-  return(
+const App: React.FC = () => {
+  return (
     <NavigationContainer>
-      <AppNavigator></AppNavigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen
+          name="Home"
+          component={MainScreen}
+          options={{ headerTitle: '' }}
+        />
+        <Drawer.Screen
+          name="My Appreciations"
+          component={AppreciationScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: '#C5B1EC',
+            },
+          }}
+        />
+        <Drawer.Screen name="Settings" component={SettingScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
-  )
-}
-
+  );
+};
 
 export default App;

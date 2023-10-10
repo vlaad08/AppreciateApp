@@ -1,19 +1,21 @@
-import { Button, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from 'react'
-import { StackNavigationProp } from "@react-navigation/stack";
-import { StackList } from "../routes/NavigationTypes";
 import Grateful from "../src/Grateful";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 
-type ScreenProps = {
-  navigation: StackNavigationProp<StackList, 'Appr'>;
+
+type AppNavigatorParamList = {
+  Home: undefined;
+  'My Appreciations': undefined;
+  Settings: undefined;
 };
+type MainScreenNavigationProp = DrawerNavigationProp<AppNavigatorParamList, 'Home'>;
 
 
-
-const MainScreen : React.FC<ScreenProps> = ({navigation}) =>{
+const MainScreen: React.FC<{ navigation: MainScreenNavigationProp }>= ({navigation}) =>{
     return (
         <View style={styles.container}>
-          <Grateful navigation={navigation} />
+          <Grateful navigation={navigation}/>
         </View>
       );
 }

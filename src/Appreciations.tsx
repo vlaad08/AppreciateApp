@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     width: "20%",
     textAlign: "center",
     backgroundColor: "#8558BE",
-    padding: "2%",
     color: "white",
     shadowColor: "#000",
       shadowOffset: {
@@ -91,6 +90,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.41,
       shadowRadius: 9.11,
       elevation: 14,
+      justifyContent: 'center',
+      alignSelf: 'center',
+      padding:'3%',
   },
   apprContainer : {
     padding: 10,
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
   },
   apprList : {
     justifyContent: "flex-start",
-    rowGap: 20,
+    rowGap: 10,
     flexGrow: 1,
     height: "auto"
   }

@@ -15,33 +15,29 @@ const saveAppreciation = async (appreciation: string) => {
     const dateString = currentDate.getUTCDate() + " " + monthNames[currentDate.getUTCMonth()] + " " + currentDate.getUTCFullYear(); 
     const dataToSave = { date: dateString, text: appreciation };
     await AsyncStorage.setItem(dateString, JSON.stringify(dataToSave));
-    console.log('Data saved successfully.');
     
   } catch (error) {
     console.error('Error saving data: ', error);
-    
   }
-};
+}
 
 interface ButtonsProps {
     input: string;
     handleInput: (txt : string) => void;
+    navigation : any;
   }
 
 
-const nothingAlert = ({}) =>{
-  Alert.alert("", "Don't worry, you can always come back later, until then, here's all the days you were grateful",
+const nothingAlert = () =>{
+  Alert.alert("Nothing for today?", "Don't worry, you can always come back later, until then, you can look what you wrote until now",
   [
     {
-      text: "OK",
-    },
-    {
-      text: "Wait I have something"
+      text: "OK"
     }
   ])
 }
 
-const Buttons: React.FC<ButtonsProps> = ({ input, handleInput }) => {
+const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
   
 
   return (
@@ -55,7 +51,7 @@ const Buttons: React.FC<ButtonsProps> = ({ input, handleInput }) => {
               <Text style={styles.btn1}>I'm grateful for this</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}> 
+          <TouchableOpacity onPress={() => {nothingAlert(); navigation.navigate('My Appreciations')}}> 
             <View style = {styles.btn2Container}>
               <Text style={styles.btn2}>I have nothing for today</Text>
             </View>
@@ -71,8 +67,7 @@ export default Buttons;
 const styles = StyleSheet.create(
   {
     container: {
-      flex: 1,
-      alignSelf: 'center'
+      flex: 1
     },
     btnContainer: {
       flex: 2,

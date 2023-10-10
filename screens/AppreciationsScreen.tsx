@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet } from 'react-native'
 import Appreciations from '../src/Appreciations';
 import { useFocusEffect } from '@react-navigation/native';
@@ -45,7 +45,7 @@ const AppreciationScreen = () => {
                 const fetchData = async () => {
                   const data = await getAppreciations();
                   const filteredData = data.filter(item => item !== null) as string[];
-                  setAppr(filteredData);
+                  setAppr(filteredData.reverse());
                 };
             
                 fetchData();

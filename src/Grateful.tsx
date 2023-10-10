@@ -1,8 +1,12 @@
 import React, {useState} from "react";
-import { StyleSheet, View, Text, TextInput, Keyboard, TouchableWithoutFeedback} from "react-native";
+import { StyleSheet, View, Text, TextInput, Keyboard, TouchableWithoutFeedback, Button} from "react-native";
 import Buttons from "./Buttons";  
 
-const Grateful = () => {
+interface GratefulProp{
+  navigation : any;
+}
+
+const Grateful : React.FC<GratefulProp> = ({navigation}) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [characters, setCharacters] = useState<number>(0);
 
@@ -11,29 +15,29 @@ const Grateful = () => {
     setCharacters(txt.length);
   };
 
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>What are you grateful for today?</Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible = {false}>
-      <View style={styles.inputContainer}>
-      <TextInput
-        placeholder="Start writing here..."
-        placeholderTextColor={'grey'}
-        style={styles.input}
-        multiline
-        numberOfLines={5}
-        maxLength={150}
-        onChangeText={handleInputChange}
-        value={inputValue}
-      />
-      <Text style={{
-        alignSelf: 'flex-start',
-        marginTop: "2%"
-      }}>{characters}/150</Text>     
-      <Buttons input={inputValue} handleInput={handleInputChange} />
-      </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Start writing here..."
+            placeholderTextColor={'grey'}
+            style={styles.input}
+            multiline
+            numberOfLines={5}
+            maxLength={150}
+            onChangeText={handleInputChange}
+            value={inputValue}
+          />
+          <Text style={{
+            alignSelf: 'flex-start',
+            marginTop: "2%"
+          }}>{characters}/150</Text>
+          <Buttons input={inputValue} handleInput={handleInputChange} navigation={navigation}/>
+        </View>
       </TouchableWithoutFeedback>
+      
     </View>
   );
 };
@@ -49,7 +53,9 @@ const styles = StyleSheet.create(
           justifyContent:'center', 
           alignItems: 'flex-start',
           padding: "5%",
-          marginTop: "2%"
+          marginTop: "2%",
+          height: 'auto',
+          width: '100%'
         },
         title :{
             color: 'black',
@@ -60,13 +66,12 @@ const styles = StyleSheet.create(
         input : {
             fontSize : 18,
             alignSelf: 'flex-start',
-            marginTop: "3%",
-            borderWidth: 2,
-            
+            marginTop: "3%",    
         },
         inputContainer :{
           flex: 2, 
-          alignItems: 'center'
+          alignItems: 'center',
+          width: '100%'
         }
     }
 )
