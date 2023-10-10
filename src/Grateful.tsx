@@ -17,7 +17,7 @@ const Grateful : React.FC<GratefulProp> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>What are you grateful for today?</Text>
+      <Text style={styles.title}>What's filling your gratitude jar today?</Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible = {false}>
         <View style={styles.inputContainer}>
           <TextInput
@@ -61,12 +61,13 @@ const styles = StyleSheet.create(
             color: 'black',
             fontSize : 22 ,
             fontWeight : '600',
-            alignSelf: 'center'
+            alignSelf: 'center',
+            textAlign: 'center'
         },
         input : {
             fontSize : 18,
             alignSelf: 'flex-start',
-            marginTop: "3%",    
+            marginTop: "5%",    
         },
         inputContainer :{
           flex: 2, 

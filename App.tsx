@@ -7,28 +7,38 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import SettingScreen from './screens/SettingsScreen';
 import * as Notifications from 'expo-notifications'
 import * as Device from 'expo-device'
-import { Platform } from 'react-native';
 
 type AppNavigatorParamList = {
-  Home: undefined;
-  'My Appreciations': undefined;
+  'Gratitude Hub': undefined;
+  'Gratitude Journal': undefined;
   Settings: undefined;
 };
 
 const Drawer = createDrawerNavigator<AppNavigatorParamList>();
 
 
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+
+
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Gratitude Hub">
         <Drawer.Screen
-          name="Home"
+          name="Gratitude Hub"
           component={MainScreen}
           options={{ headerTitle: '' }}
         />
         <Drawer.Screen
-          name="My Appreciations"
+          name="Gratitude Journal"
           component={AppreciationScreen}
           options={{
             headerStyle: {
@@ -47,49 +57,39 @@ const App: React.FC = () => {
 export default App;
 
 
-// Notifications.setNotificationHandler({
-//   handleNotification: async () => ({
-//     shouldShowAlert: true,
-//     shouldPlaySound: false,
-//     shouldSetBadge: false,
-//   }),
-// });
 
 
 
 
 
-
-
-async function registerForNotificationsAsync() {
+const registerForNotificationsAsync = async () => {
   if (Device.isDevice) {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
+    
     if (existingStatus !== 'granted') {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    else
-    {
-      // const dailyNotification = async () => {
-      //   const now = new Date();
-      //   const tomorrow = new Date(now);
-      //   tomorrow.setDate(tomorrow.getDate() + 1);
-      //   tomorrow.setHours(20, 0, 0, 0); 
-      //   await Notifications.scheduleNotificationAsync({
-      //     content: {
-      //       title: 'What are you grateful for today?',
-      //       body: 'Come in and log what made you grateful for today!',
-      //     },
-      //     trigger: {
-      //       seconds: 5
-      //     }
-      //   });
 
-      // };
-      // dailyNotification();
-    }
+    const dailyNotification = async () => {
+      const now = new Date();
+      const tomorrow = new Date(now);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(20, 0, 0, 0); 
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'What\'s lighting up your gratitude radar today?',
+          body: 'Step in and share the highlights that filled your day with gratitude!',
+        },
+        trigger: {
+          date : tomorrow
+        },
+      });
+    };
+
+    dailyNotification();
   } 
-}
+};
 
 registerForNotificationsAsync();

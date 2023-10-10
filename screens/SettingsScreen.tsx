@@ -27,13 +27,13 @@ const deleteAlert = () => {
 const SettingScreen = () =>{
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.btnContainer}>
                 <Text>Privacy Lock</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.btnContainer}>
                 <Text>Export List as PDF</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.btnContainer}>
                 <Text>Feedback and Support</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => deleteAlert()} style={styles.btnContainer}>

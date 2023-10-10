@@ -29,7 +29,7 @@ interface ButtonsProps {
 
 
 const nothingAlert = () =>{
-  Alert.alert("Nothing for today?", "Don't worry, you can always come back later, until then, you can look what you wrote until now",
+  Alert.alert("Nothing for today?", "No rush! Feel free to return at your own pace. In the meantime, take a stroll down memory lane and revisit your earlier thoughts.",
   [
     {
       text: "OK"
@@ -46,12 +46,12 @@ const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.btnContainer}>
-          <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput("")}}>
+          <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput(""); navigation.navigate('Gratitude Journal')}}>
             <View style={styles.btn1Container}>
-              <Text style={styles.btn1}>I'm grateful for this</Text>
+              <Text style={styles.btn1}>Capture My Gratitude!</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {nothingAlert(); navigation.navigate('My Appreciations')}}> 
+          <TouchableOpacity onPress={() => {nothingAlert(); navigation.navigate('Gratitude Journal')}}> 
             <View style = {styles.btn2Container}>
               <Text style={styles.btn2}>I have nothing for today</Text>
             </View>
