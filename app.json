@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GratitudeApp",
-    "slug": "GratitudeApp",
+    "name": "App-reciate",
+    "slug": "App-reciate",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
