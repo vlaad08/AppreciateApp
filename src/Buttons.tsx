@@ -1,6 +1,9 @@
 import { View, TouchableOpacity, Text, StyleSheet, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Alert } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from "expo-linear-gradient";
+
+
 
 const monthNames = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
@@ -8,14 +11,12 @@ const monthNames = [
 ];
 
 
-
 const saveAppreciation = async (appreciation: string) => {
   try {
     const currentDate = new Date();
-    const dateString = currentDate.getUTCDate() + " " + monthNames[currentDate.getUTCMonth()] + " " + currentDate.getUTCFullYear(); 
+    const dateString = currentDate.getUTCDate() + " " + monthNames[currentDate.getUTCMonth()] + " " + currentDate.getUTCFullYear();
     const dataToSave = { date: dateString, text: appreciation };
     await AsyncStorage.setItem(dateString, JSON.stringify(dataToSave));
-    
   } catch (error) {
     console.error('Error saving data: ', error);
   }
@@ -38,7 +39,7 @@ const nothingAlert = () =>{
 }
 
 const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
-  
+ 
 
   return (
     <KeyboardAvoidingView
@@ -46,11 +47,17 @@ const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.btnContainer}>
-          <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput(""); navigation.navigate('Gratitude Journal')}}>
-            <View style={styles.btn1Container}>
-              <Text style={styles.btn1}>Capture My Gratitude!</Text>
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput(""); navigation.navigate('Gratitude Journal')}}>
+              <LinearGradient
+              colors={["rgba(104,157,214,1)","rgba(185,213,249,1)"]}
+              start={{x:0, y:0}}
+              end={{x:1,y:0}}
+              style={[styles.btn1Container, styles.shadow]}>
+              <View>
+                <Text style={styles.btn1}>Capture My Gratitude!</Text>
+              </View>
+              </LinearGradient>
+            </TouchableOpacity>
           <TouchableOpacity onPress={() => {nothingAlert(); navigation.navigate('Gratitude Journal')}}> 
             <View style = {styles.btn2Container}>
               <Text style={styles.btn2}>I have nothing for today</Text>
@@ -71,13 +78,33 @@ const styles = StyleSheet.create(
     },
     btnContainer: {
       flex: 2,
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      paddingTop: "5%"
     },
-
     btn1Container : {
       borderRadius: 25,
-      backgroundColor: '#8558BE',
+      overflow: "hidden"
+    },
+    shadow:{
+      ...Platform.select({
+        ios: {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 7 },
+          shadowOpacity: 0.4,
+          shadowRadius: 9,
+        },
+        android: {
+          elevation: 14,
+        },
+      }),
+    },
+    btn2Container : {
+      marginTop: "3%",
+      borderRadius: 25,
+      backgroundColor: '#fcede7',
+      borderWidth: 2,
+      borderColor: "#669bd3",
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
@@ -86,42 +113,26 @@ const styles = StyleSheet.create(
       shadowOpacity: 0.41,
       shadowRadius: 9.11,
       elevation: 14
-    },
-    btn2Container : {
-      marginTop: "2%",
-      borderRadius: 25,
-      backgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: "#8558BE",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 7,
-      },
-      shadowOpacity: 0.41,
-      shadowRadius: 9.11,
-      elevation: 14,
       },
     btn1: {
       color: 'white',
-      fontSize: 18,
-      fontWeight: '700',
+      fontSize: 20,
       textAlign: 'center',
- 
       padding: '3%',
       height: 'auto',
       width: 300,
       overflow: 'hidden',
-      
+      fontFamily: 'lato'
     },
     btn2: {
       marginTop: '2%',
-      color: '#8558BE',
+      color: '#669bd3',
       textAlign: 'center',
       padding: '2%',
       height: 'auto',
       width: 200,
-      fontWeight: '400'
+      fontFamily: 'lato',
+      fontSize: 16
     }
   }
 )

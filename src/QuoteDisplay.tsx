@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import jsonData from '../assets/quotes.json';
 
+
 interface State {
     randomQuote: { quote: string; author: string };
   }
   
   class QuoteDisplay extends Component<{}, State> {
+
+    
     constructor(props: {}) {
       super(props);
       this.state = {
@@ -52,10 +55,12 @@ interface State {
     },
     quote :{
         fontSize: 20,
-        color: 'white'
+        color: 'black',
+        fontFamily: 'lato'
     },
     author : {
         fontSize: 16,
-        color: 'white'
+        color: 'black',
+        fontFamily: 'lato'
     }
   })

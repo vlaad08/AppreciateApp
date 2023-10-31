@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import MainScreen from './screens/MainScreen';
 import AppreciationScreen from './screens/AppreciationsScreen';
@@ -18,6 +18,7 @@ const Drawer = createDrawerNavigator<AppNavigatorParamList>();
 
 
 
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -29,24 +30,45 @@ Notifications.setNotificationHandler({
 
 
 const App: React.FC = () => {
+
+  
+
+
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Gratitude Hub">
+      <Drawer.Navigator initialRouteName="Gratitude Hub"
+      screenOptions={{drawerStyle : {
+        backgroundColor:'#fcede7',
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center'
+      }, drawerLabelStyle : {
+        fontFamily: 'lato',
+        fontSize: 18
+      }, drawerActiveTintColor : "black"}}>
         <Drawer.Screen
           name="Gratitude Hub"
           component={MainScreen}
-          options={{ headerTitle: '' }}
+          options={{ headerTitle: '' , headerStyle: {
+            backgroundColor: "rgba(252,237,231,255)"
+          },
+        headerTintColor: "black"}}
         />
         <Drawer.Screen
           name="Gratitude Journal"
           component={AppreciationScreen}
-          options={{
-            headerStyle: {
-              backgroundColor: '#C5B1EC',
-            },
+          options={{ headerTitle: '' , headerStyle: {
+            backgroundColor: "rgba(252,237,231,255)"
+          },
+          headerTintColor: "black"
           }}
         />
-        <Drawer.Screen name="Settings" component={SettingScreen} />
+        <Drawer.Screen name="Settings" component={SettingScreen} 
+        options={{ headerTitle: '' , headerStyle: {
+          backgroundColor: "rgba(252,237,231,255)"
+        },
+         headerTintColor: "black"}}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -71,20 +93,15 @@ const registerForNotificationsAsync = async () => {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-
     const dailyNotification = async () => {
-      const now = new Date();
-      const tomorrow = new Date(now);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      tomorrow.setHours(20, 0, 0, 0); 
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: 'What\'s lighting up your gratitude radar today?',
+          title: 'What\'s lighting up your day?',
           body: 'Step in and share the highlights that filled your day with gratitude!',
         },
         trigger: {
-          date : tomorrow
-        },
+          seconds: 5
+          },
       });
     };
 
