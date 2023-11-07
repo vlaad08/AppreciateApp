@@ -35,7 +35,13 @@ const Appreciations : React.FC<AppreciationsProps> = ({appreciations}) => {
 
               return (
                 <View style={styles.apprContainer}>
-                  <Text style={styles.apprDate}>{date}</Text>
+                  <View style={{
+                  borderBottomWidth: 0.5,
+                  borderStyle: 'solid',
+                  borderBottomColor: "gray"
+                  }}>
+                    <Text style={styles.apprDate}>{date}</Text>
+                  </View>
                   <Text style={styles.apprText}>{text()}</Text>
                 </View>
               );
@@ -67,46 +73,39 @@ const styles = StyleSheet.create({
   },
   apprText : {
     fontSize: 17,
-    width: "80%",
     fontFamily: 'lato',
-    backgroundColor: "rgba(252,237,231,255)",
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-    padding: "2%",
-    paddingBottom: "5%",
-    overflow: 'hidden',
-    justifyContent: 'center',
     alignSelf: 'center',
+    padding: "2%"
   },
   apprDate : {
     fontFamily: 'lato',
-    width: "80%",
     textAlign: "center",
-    backgroundColor: "rgba(252,237,231,255)",
     color: "black",
-    
-      justifyContent: 'center',
-      alignSelf: 'center',
-      padding:'3%',
-      borderBottomColor: "gray",
-      borderBottomWidth: 0.5
+    justifyContent: 'center',
+    alignSelf: 'center',
+    padding:'3%'
   },
   apprContainer : {
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
     padding: 10,
-    flex: 1,
     shadowColor: "#000",
-      shadowOffset: {
+      shadowOffset: { 
         width: 0,
         height: 7,
       },
       shadowOpacity: 0.41,
       shadowRadius: 9.11,
       elevation: 14,
+    backgroundColor: "rgba(252,237,231,255)",
+    minWidth: "80%",
+    maxWidth: "80.1%"
+    
   },
   apprList : {
-    justifyContent: "flex-start",
-    rowGap: 10,
-    flexGrow: 1,
-    height: "auto"
+    alignItems: "center",
+    rowGap: 15,
+    width: "100%",
+    flexGrow: 1
   }
 })

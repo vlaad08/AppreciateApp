@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { StyleSheet, View, Text, TextInput, Keyboard, TouchableWithoutFeedback, Button} from "react-native";
-import Buttons from "./Buttons";  
-import * as Font from 'expo-font'
+import Buttons from "./Buttons"; 
 
 
 
@@ -12,22 +11,7 @@ interface GratefulProp{
 const Grateful : React.FC<GratefulProp> = ({navigation}) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [characters, setCharacters] = useState<number>(0);
-  const [fontLoaded, setFontLoaded] = useState(false);
-
-  useEffect(() => {
-    const loadFont = async () => {
-      await Font.loadAsync({
-        'lato': require('../assets/fonts/Lato-Regular.ttf'),
-      });
-      setFontLoaded(true);
-    };
-
-    loadFont();
-  }, []);
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>;
-  }
+  
 
   const handleInputChange = (txt: string) => {
     setInputValue(txt);

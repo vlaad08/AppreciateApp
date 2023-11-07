@@ -47,7 +47,9 @@ const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.btnContainer}>
-            <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput(""); navigation.navigate('Gratitude Journal')}}>
+            <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput(""); navigation.navigate('Gratitude Journal')}}
+            style={{overflow: "visible"}}
+            >
               <LinearGradient
               colors={["rgba(104,157,214,1)","rgba(185,213,249,1)"]}
               start={{x:0, y:0}}
@@ -84,15 +86,15 @@ const styles = StyleSheet.create(
     },
     btn1Container : {
       borderRadius: 25,
-      overflow: "hidden"
     },
     shadow:{
       ...Platform.select({
         ios: {
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 7 },
-          shadowOpacity: 0.4,
+          shadowOpacity: 0.8,
           shadowRadius: 9,
+          backgroundColor: "white"
         },
         android: {
           elevation: 14,
@@ -121,7 +123,6 @@ const styles = StyleSheet.create(
       padding: '3%',
       height: 'auto',
       width: 300,
-      overflow: 'hidden',
       fontFamily: 'lato'
     },
     btn2: {

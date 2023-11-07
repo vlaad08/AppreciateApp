@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import MainScreen from './screens/MainScreen';
 import AppreciationScreen from './screens/AppreciationsScreen';
@@ -7,6 +8,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import SettingScreen from './screens/SettingsScreen';
 import * as Notifications from 'expo-notifications'
 import * as Device from 'expo-device'
+import * as Font from 'expo-font'
 
 type AppNavigatorParamList = {
   'Gratitude Hub': undefined;
@@ -30,7 +32,22 @@ Notifications.setNotificationHandler({
 
 
 const App: React.FC = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
 
+  useEffect(() => {
+    const loadFont = async () => {
+      await Font.loadAsync({
+        'lato': require('./assets/fonts/Lato-Regular.ttf'),
+      });
+      setFontLoaded(true);
+    };
+
+    loadFont();
+  }, []);
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>;
+  }
   
 
 
