@@ -66,7 +66,7 @@ const App: React.FC = () => {
           borderColor: "white",
           borderWidth: 0.5
         }}>Loading...</Text>
-  </View>
+  </View> 
   }
   
 

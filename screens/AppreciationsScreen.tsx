@@ -73,10 +73,15 @@ const AppreciationScreen = () => {
             alignContent : "center"
           }}>
               <Text style = {{
-                color : 'White'
+                color : 'White',
+                fontSize: 20,
+                padding: "3%",
+                borderStyle: "solid",
+                borderColor: "white",
+                borderWidth: 0.5
               }}>Loading...</Text>
-            </View>
-            );
+        </View>
+        );
     }
 
     return(
