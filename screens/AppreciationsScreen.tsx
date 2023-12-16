@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet } from 'react-native'
+import {View, StyleSheet, Text } from 'react-native'
 import Appreciations from '../src/Appreciations';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -62,13 +62,26 @@ const AppreciationScreen = () => {
 
         fetchData();
     }, [])
-);
+    );
+
+    if(!appreciations)
+    {
+        return ( 
+        <View style = {{
+            flex: 1,
+            justifyContent: "center",
+            alignContent : "center"
+          }}>
+              <Text style = {{
+                color : 'White'
+              }}>Loading...</Text>
+            </View>
+            );
+    }
 
     return(
       <LinearGradient
-        colors={['rgba(182,198,238,1)', 'rgba(201,249,253,1)']}
-        start={{x:0, y:0.5}}
-        end={{x: 1, y:0}}
+        colors={["#1f272f", "black"]}
         style={styles.container}
         >
             <Appreciations appreciations={appreciations}/>

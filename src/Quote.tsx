@@ -6,9 +6,6 @@ import QuoteDisplay from './QuoteDisplay';
 
 
 const Quote  = () => {
-    
-   
-
     return (
         <View style={styles.container}>
             <QuoteDisplay/>
@@ -21,8 +18,8 @@ const styles = StyleSheet.create({
     container : {
         width: '100%',
         height: 200,
-        backgroundColor: 'rgba(252,237,231,255)',
-        shadowColor: "#000",
+        backgroundColor: 'white',
+        shadowColor: "white",
         shadowOffset: {
             width: 0,
             height: 7,

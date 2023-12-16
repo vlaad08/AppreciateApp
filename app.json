@@ -4,10 +4,10 @@
     "slug": "App-reciate",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/coaie.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/coaie.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,14 +15,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "1"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "useNotificationsApi": true
+      "useNotificationsApi": true,
+      "package": "com.vlaad_08.Appreciate"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0e1f2a1b-c56e-43e4-9bf5-49f530c84b09"
+      }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-1566157998015070~9612794422",
+    "ios_app_id": "ca-app-pub-1566157998015070~3158381927"
   }
 }

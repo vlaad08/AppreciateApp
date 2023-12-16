@@ -12,13 +12,20 @@ const monthNames = [
 
 
 const saveAppreciation = async (appreciation: string) => {
-  try {
-    const currentDate = new Date();
-    const dateString = currentDate.getUTCDate() + " " + monthNames[currentDate.getUTCMonth()] + " " + currentDate.getUTCFullYear();
-    const dataToSave = { date: dateString, text: appreciation };
-    await AsyncStorage.setItem(dateString, JSON.stringify(dataToSave));
-  } catch (error) {
-    console.error('Error saving data: ', error);
+  if(appreciation.length != 0)
+  {
+    try {
+      const currentDate = new Date();
+      const dateString = currentDate.getUTCDate() + " " + monthNames[currentDate.getUTCMonth()] + " " + currentDate.getUTCFullYear();
+      const dataToSave = { date: dateString, text: appreciation };
+      await AsyncStorage.setItem(dateString, JSON.stringify(dataToSave));
+    } catch (error) {
+      console.error('Error saving data: ', error);
+    }
+  }
+  else
+  {
+    emptyField();
   }
 }
 
@@ -38,6 +45,14 @@ const nothingAlert = () =>{
   ])
 }
 
+const emptyField = () => {
+  Alert.alert("Oops, you can't do that", "Please fill out the field!", [
+    {
+      text: "Ok"
+    }
+  ])
+}
+
 const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
  
 
@@ -50,15 +65,9 @@ const Buttons: React.FC<ButtonsProps> = ({ input, handleInput, navigation}) => {
             <TouchableOpacity onPress={() => { saveAppreciation(input); Keyboard.dismiss(); handleInput(""); navigation.navigate('Gratitude Journal')}}
             style={{overflow: "visible"}}
             >
-              <LinearGradient
-              colors={["rgba(104,157,214,1)","rgba(185,213,249,1)"]}
-              start={{x:0, y:0}}
-              end={{x:1,y:0}}
-              style={[styles.btn1Container, styles.shadow]}>
-              <View>
+              <View style={[[styles.btn1Container, styles.shadow]]}>
                 <Text style={styles.btn1}>Capture My Gratitude!</Text>
               </View>
-              </LinearGradient>
             </TouchableOpacity>
           <TouchableOpacity onPress={() => {nothingAlert(); navigation.navigate('Gratitude Journal')}}> 
             <View style = {styles.btn2Container}>
@@ -104,20 +113,10 @@ const styles = StyleSheet.create(
     btn2Container : {
       marginTop: "3%",
       borderRadius: 25,
-      backgroundColor: '#fcede7',
-      borderWidth: 2,
-      borderColor: "#669bd3",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 7,
-      },
-      shadowOpacity: 0.41,
-      shadowRadius: 9.11,
-      elevation: 14
+      backgroundColor: 'white'
       },
     btn1: {
-      color: 'white',
+      color: 'black',
       fontSize: 20,
       textAlign: 'center',
       padding: '3%',
@@ -127,7 +126,7 @@ const styles = StyleSheet.create(
     },
     btn2: {
       marginTop: '2%',
-      color: '#669bd3',
+      color: 'black',
       textAlign: 'center',
       padding: '2%',
       height: 'auto',

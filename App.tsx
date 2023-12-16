@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import MainScreen from './screens/MainScreen';
 import AppreciationScreen from './screens/AppreciationsScreen';
@@ -19,7 +19,14 @@ type AppNavigatorParamList = {
 const Drawer = createDrawerNavigator<AppNavigatorParamList>();
 
 
-
+/* 
+- add multiple languages
+- be able to delete desired appr
+- when pressed on nothing for today, give some ideas for the user of what to do so he can feel better
+- make a small tutorial
+- the culors are giving girly vibes which migth not be attractive for boys and men
+- able to insert images
+*/
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -46,7 +53,20 @@ const App: React.FC = () => {
   }, []);
 
   if (!fontLoaded) {
-    return <Text>Loading...</Text>;
+    return <View style = {{
+      flex: 1,
+      justifyContent: "center",
+      alignContent : "center"
+    }}>
+        <Text style = {{
+          color : 'White',
+          fontSize: 20,
+          padding: "3%",
+          borderStyle: "solid",
+          borderColor: "white",
+          borderWidth: 0.5
+        }}>Loading...</Text>
+  </View>
   }
   
 
@@ -55,36 +75,40 @@ const App: React.FC = () => {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Gratitude Hub"
       screenOptions={{drawerStyle : {
-        backgroundColor:'#fcede7',
+        backgroundColor:'#1f272f',
         display: 'flex',
         justifyContent: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        borderTopWidth : 0,
+        shadowOpacity : 0
       }, drawerLabelStyle : {
         fontFamily: 'lato',
-        fontSize: 18
+        fontSize: 18,
+        color: "white"
       }, drawerActiveTintColor : "black"}}>
         <Drawer.Screen
           name="Gratitude Hub"
           component={MainScreen}
           options={{ headerTitle: '' , headerStyle: {
-            backgroundColor: "rgba(252,237,231,255)"
+            backgroundColor: "#1f272f",
+            borderStartWidth : 0
           },
-        headerTintColor: "black"}}
+        headerTintColor: "white"}}
         />
         <Drawer.Screen
           name="Gratitude Journal"
           component={AppreciationScreen}
           options={{ headerTitle: '' , headerStyle: {
-            backgroundColor: "rgba(252,237,231,255)"
+            backgroundColor: "#1f272f",
           },
-          headerTintColor: "black"
+          headerTintColor: "white"
           }}
         />
         <Drawer.Screen name="Settings" component={SettingScreen} 
         options={{ headerTitle: '' , headerStyle: {
-          backgroundColor: "rgba(252,237,231,255)"
+          backgroundColor: "#1f272f"
         },
-         headerTintColor: "black"}}
+         headerTintColor: "white"}}
         />
       </Drawer.Navigator>
     </NavigationContainer>
@@ -117,13 +141,16 @@ const registerForNotificationsAsync = async () => {
           body: 'Step in and share the highlights that filled your day with gratitude!',
         },
         trigger: {
-          seconds: 5
-          },
+          hour: 20,
+          minute: 0,
+          repeats: true
+        }
       });
     };
 
     dailyNotification();
   } 
 };
+
 
 registerForNotificationsAsync();

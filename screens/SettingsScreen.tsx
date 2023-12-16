@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react'
 import { View, Text, StyleSheet, Alert} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -37,21 +38,29 @@ const inBuildingAlert = () => {
 
 const SettingScreen = () =>{
     return (
-        <View style={styles.container}>
+
+        <LinearGradient
+        colors={["#1f272f", "black"]}
+        style={styles.container}>
             <TouchableOpacity onPress={() => deleteAlert()} style={styles.btnContainer}>
                  <Text style={styles.btnText}>Clear appreciations</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => inBuildingAlert()} style={styles.btnContainer}>
                 <Text style={styles.btnText}>Feedback and Support</Text>
             </TouchableOpacity>
-        </View>
+
+            <View style={styles.futureBox}>
+                <Text style={styles.futureText}>Exciting new features coming soon</Text> 
+            </View>
+        </LinearGradient>
+
     )
 }
 
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        backgroundColor: 'rgba(252,237,231,255)',
+        backgroundColor: '#1f272f',
         padding: '5%',
 
     },
@@ -66,6 +75,22 @@ const styles = StyleSheet.create({
     },
     btnText : {
         fontSize: 20,
+        color: 'white'
+    },
+    futureBox : {
+        flex : 2,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    futureText : {
+        color : 'white',
+        fontSize : 20,
+        borderWidth: 0.5,
+        borderColor: "white",
+        borderStyle : "solid",
+        padding: "5%",
+        width: "50%",
+        textAlign: "center"
     }
 })
 export default SettingScreen;

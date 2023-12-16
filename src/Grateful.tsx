@@ -21,7 +21,7 @@ const Grateful : React.FC<GratefulProp> = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible = {false}>
     <View style={styles.container}>
-      <Text style={styles.title}>What's filling your gratitude jar today?</Text>
+      <Text style={styles.title}>Reflect on today's highlight...</Text>
      
         <View style={styles.inputContainer}>
           <View style={styles.inputBK}>
@@ -41,7 +41,8 @@ const Grateful : React.FC<GratefulProp> = ({navigation}) => {
           <Text style={{
               alignSelf: 'flex-start',
               marginTop: "2%",
-              fontFamily: 'lato'
+              fontFamily: 'lato',
+              color: 'white'
             }}>{characters}/150</Text>
           <Buttons input={inputValue} handleInput={handleInputChange} navigation={navigation}/>
         </View>
@@ -56,21 +57,21 @@ export default Grateful;
 const styles = StyleSheet.create(
     {
       inputBK :{
-        backgroundColor: "#fcede7",
+        backgroundColor: "white",
         width: "95%",
         borderRadius: 25,
         marginTop: "4%",
         padding: "5%",
         minHeight: 150,
-        shadowColor: "#000",
+        shadowColor: "white",
         shadowOffset: {
           width: 0,
           height: 7,
         },
-        shadowOpacity: 0.43,
-        shadowRadius: 9.51,
+        shadowOpacity: 0.5,
+        shadowRadius: 10,
 
-        elevation: 15,
+        elevation: 16,
       },
         container :{
           flex : 1,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create(
           width: '100%',
         },
         title :{
-            color: 'black',
+            color: 'white',
             fontSize : 22 ,
             fontWeight : '600',
             alignSelf: 'center',
